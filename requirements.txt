@@ -14,6 +14,7 @@ fonttools==4.53.1
 kiwisolver==1.4.5
 matplotlib==3.9.1
 numpy==2.0.1
+opencv-python==4.6.0.66
 packaging==24.1
 pillow==10.4.0
 pyftdi==0.55.4

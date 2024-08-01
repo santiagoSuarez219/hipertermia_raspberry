@@ -1,6 +1,7 @@
 # from graficas_valores_termicos.graficas_valores_termicos import AdquisionValoresTermicos, GraficaValoresTermicos
 # from control_temperatura.control_tempertatura import ControlTemperatura
 from imagen_termica.imagen_termica import Grafica, ImagenTermica
+from imagen_rgb.imagen_rgb import GraficaRGB, ImagenRGB
 from PySide6.QtWidgets import QApplication, QMainWindow
 from ui.mainwindow import Ui_MainWindow
 import sys
@@ -12,12 +13,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.grafica = Grafica()
         self.imagen_termica = ImagenTermica(self.grafica)
         self.imagen_termica.start()
+        self.graficaRGB = GraficaRGB()
+        self.imagen_rgb = ImagenRGB(self.graficaRGB)
+        self.imagen_rgb.start()
         # self.grafica_valores_termicos = GraficaValoresTermicos()
         # self.adquision_valores_termicos = AdquisionValoresTermicos(self.grafica_valores_termicos)
         # self.adquision_valores_termicos.start()
         self.imagen_termica.actualizar_labels_signal.connect(self.actualizar_labels_temperatura)
         # self.grafica.temperatura_control_signal.connect(self.actualizar_datos_control)
         self.imagen_termica_layout.addWidget(self.grafica)
+        self.verticalLayout_3.addWidget(self.graficaRGB)
         self.toggleControl.toggled.connect(self.toogle_control)
         self.toogleLazoAbierto.setChecked(True)
         # self.actuador_value_send.clicked.connect(self.enviar_actuador)
