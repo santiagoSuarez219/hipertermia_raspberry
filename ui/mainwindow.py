@@ -65,7 +65,7 @@ class Ui_MainWindow(object):
         font = QFont()
         font.setPointSize(12)
         font.setBold(True)
-        font.setWeight(75)
+        font.setWeight(QFont.Bold)
         self.parametros_termicos_label.setFont(font)
 
         self.verticalLayout.addWidget(self.parametros_termicos_label)
