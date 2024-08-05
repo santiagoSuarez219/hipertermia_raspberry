@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainwindowkiRavZ.ui'
+## Form generated from reading UI file 'mainwindowukeCbc.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -44,6 +44,11 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3 = QVBoxLayout()
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.image_rgb = QLabel(self.imagenes_widget)
+        self.image_rgb.setObjectName(u"image_rgb")
+
+        self.verticalLayout_3.addWidget(self.image_rgb)
+
 
         self.horizontalLayout_8.addLayout(self.verticalLayout_3)
 
@@ -262,6 +267,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Aplicativo Hipertermia", None))
+        self.image_rgb.setText("")
         self.parametros_termicos_label.setText(QCoreApplication.translate("MainWindow", u"Parametros termicos", None))
         self.temperatura_maxima.setText(QCoreApplication.translate("MainWindow", u"Temperatura maxima:", None))
         self.temperatura_maxima_value.setText(QCoreApplication.translate("MainWindow", u"43 \u00b0C", None))

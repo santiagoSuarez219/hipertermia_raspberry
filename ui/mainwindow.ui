@@ -48,7 +48,7 @@
         <number>0</number>
        </property>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_2"/>
+        <layout class="QVBoxLayout" name="imagen_termica_layout"/>
        </item>
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_3"/>

@@ -1,8 +1,9 @@
 # from graficas_valores_termicos.graficas_valores_termicos import AdquisionValoresTermicos, GraficaValoresTermicos
 # from control_temperatura.control_tempertatura import ControlTemperatura
 from imagen_termica.imagen_termica import Grafica, ImagenTermica
-from imagen_rgb.imagen_rgb import GraficaRGB, ImagenRGB
+from imagen_rgb.imagen_rgb import ImagenRGB
 from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtGui import QPixmap, Qt
 from ui.mainwindow import Ui_MainWindow
 import sys
 
@@ -13,9 +14,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.grafica = Grafica()
         self.imagen_termica = ImagenTermica(self.grafica)
         self.imagen_termica.start()
-        self.graficaRGB = GraficaRGB()
-        self.imagen_rgb = ImagenRGB(self.graficaRGB)
-        self.imagen_rgb.start()
+        self.start_video()
         # self.grafica_valores_termicos = GraficaValoresTermicos()
         # self.adquision_valores_termicos = AdquisionValoresTermicos(self.grafica_valores_termicos)
         # self.adquision_valores_termicos.start()
@@ -27,6 +26,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.toogleLazoAbierto.setChecked(True)
         # self.actuador_value_send.clicked.connect(self.enviar_actuador)
         self.send_button.clicked.connect(self.enviar_parametros_control)
+
+
+    def start_video(self):
+        self.ImageRGB = ImagenRGB()
+        self.ImageRGB.start()
+        self.ImageRGB.Imageupd.connect(self.show_image)
+
+    def show_image(self, Image):
+        scaled_image = Image.scaled(self.image_rgb.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        self.image_rgb.setPixmap(QPixmap.fromImage(scaled_image))
+
 
     def actualizar_labels_temperatura(self, maxima, minima, promedio):
         self.temperatura_maxima_value.setText(f"{maxima:.2f} °C")
@@ -56,6 +66,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def closeEvent(self, event):
         if self.toggleControl.isChecked():
             self.control_temperatura.handle_close()
+        self.ImageRGB.stop()
+        self.ImageRGB.wait() 
         event.accept()
 
 

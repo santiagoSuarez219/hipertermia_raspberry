@@ -1,45 +1,36 @@
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
-from matplotlib.figure import Figure
-from PySide6.QtCore import QThread
+from PySide6.QtCore import QThread, Signal
+from PySide6.QtGui import QImage
 from picamera2 import PiCamera2
 import time 
 import cv2
 
 class ImagenRGB(QThread):
+    Imageupd = Signal(QImage)
     def __init__(self, grafica):
-        super(ImagenRGB, self).__init__() 
+        super(ImagenRGB, self).__init__()
+        self.hilo_corriendo = True
         self.piCam = PiCamera2()
         self.piCam.preview_configuration.main.size = (1280, 720)
         self.piCam.preview_configuration.main.format = "RGB888"
         self.piCam.preview_configuration.align()
         self.piCam.configure("preview")
         self.piCam.start()
-        self.grafica = grafica
+
 
     def run(self):
-        while True:
-            self.actualizar_datos()
-            time.sleep(.050)
-
-    def actualizar_datos(self):
-        try: 
+        while self.hilo_corriendo:
             frame = self.piCam.capture_array()
-            self.actualizar_graficas()
-        except Exception as e:
-            print(e)
-        
-    
-    def actualizar_graficas(self):
-        self.grafica.g1.clear()
-        self.grafica.g1.imshow(self.frame)
-        self.grafica.draw()
+            rgb_image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            h, w, ch = rgb_image.shape
+            bytes_per_line = ch * w
+            q_image = QImage(rgb_image.data, w, h, bytes_per_line, QImage.Format_RGB888)
+            self.Imageupd.emit(q_image)
+
+    def stop(self):
+        self.hilo_corriendo = False
+        self.piCam.stop()
+        self.quit()
+        self.wait()
 
 
-class GraficaRGB(FigureCanvasQTAgg):
-    # temperatura_control_signal = Signal(float)
-    def __init__(self):
-        # Crear la figura y asignarle el mismo tamaño que el widget y color de fondo oscuro
-        figura = Figure(layout='tight') 
-        super(GraficaRGB, self).__init__(figura)
-        self.g1 = figura.add_subplot(111)
-        self.frame = None
+
