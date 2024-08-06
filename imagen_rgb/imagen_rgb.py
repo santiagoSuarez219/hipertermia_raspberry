@@ -1,15 +1,15 @@
 from PySide6.QtCore import QThread, Signal
 from PySide6.QtGui import QImage
-from picamera2 import PiCamera2
+from picamera2 import Picamera2
 import time 
 import cv2
 
 class ImagenRGB(QThread):
     Imageupd = Signal(QImage)
-    def __init__(self, grafica):
+    def __init__(self):
         super(ImagenRGB, self).__init__()
         self.hilo_corriendo = True
-        self.piCam = PiCamera2()
+        self.piCam = Picamera2()
         self.piCam.preview_configuration.main.size = (1280, 720)
         self.piCam.preview_configuration.main.format = "RGB888"
         self.piCam.preview_configuration.align()

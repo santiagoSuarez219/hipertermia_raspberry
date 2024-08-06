@@ -20,8 +20,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # self.adquision_valores_termicos.start()
         self.imagen_termica.actualizar_labels_signal.connect(self.actualizar_labels_temperatura)
         # self.grafica.temperatura_control_signal.connect(self.actualizar_datos_control)
-        self.imagen_termica_layout.addWidget(self.grafica)
-        self.verticalLayout_3.addWidget(self.graficaRGB)
+        self.image_termica.addWidget(self.grafica)
         self.toggleControl.toggled.connect(self.toogle_control)
         self.toogleLazoAbierto.setChecked(True)
         # self.actuador_value_send.clicked.connect(self.enviar_actuador)
@@ -44,8 +43,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.temperatura_promedio_value.setText(f"{promedio:.2f} °C")
         if self.toggleControl.isChecked():
             self.control_temperatura.temperatura_camara = maxima
-        self.adquision_valores_termicos.data_maxima_temperatura.append(maxima)
-        self.adquision_valores_termicos.data_minima_temperatura.append(minima)
     
     def toogle_control(self):
         if self.toggleControl.isChecked():

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainwindowukeCbc.ui'
+## Form generated from reading UI file 'mainwindowpFYFCR.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -18,6 +18,11 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(1127, 552)
+        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
+        MainWindow.setSizePolicy(sizePolicy)
         MainWindow.setAutoFillBackground(False)
         MainWindow.setStyleSheet(u"QWidget {\n"
 "	background-color: white;\n"
@@ -26,34 +31,26 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.horizontalLayout = QHBoxLayout(self.centralwidget)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.imagenes_widget = QWidget(self.centralwidget)
-        self.imagenes_widget.setObjectName(u"imagenes_widget")
-        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.imagenes_widget.sizePolicy().hasHeightForWidth())
-        self.imagenes_widget.setSizePolicy(sizePolicy)
-        self.horizontalLayout_8 = QHBoxLayout(self.imagenes_widget)
-        self.horizontalLayout_8.setSpacing(6)
-        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
-        self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
-        self.imagen_termica_layout = QVBoxLayout()
-        self.imagen_termica_layout.setObjectName(u"imagen_termica_layout")
-
-        self.horizontalLayout_8.addLayout(self.imagen_termica_layout)
-
-        self.verticalLayout_3 = QVBoxLayout()
-        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.image_rgb = QLabel(self.imagenes_widget)
+        self.tabWidget = QTabWidget(self.centralwidget)
+        self.tabWidget.setObjectName(u"tabWidget")
+        self.RGB = QWidget()
+        self.RGB.setObjectName(u"RGB")
+        self.image_rgb = QLabel(self.RGB)
         self.image_rgb.setObjectName(u"image_rgb")
+        self.image_rgb.setGeometry(QRect(10, 10, 861, 451))
+        self.image_rgb.setStyleSheet(u"background-color: white")
+        self.tabWidget.addTab(self.RGB, "")
+        self.tab_2 = QWidget()
+        self.tab_2.setObjectName(u"tab_2")
+        self.verticalLayoutWidget = QWidget(self.tab_2)
+        self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
+        self.verticalLayoutWidget.setGeometry(QRect(10, 10, 861, 451))
+        self.image_termica = QVBoxLayout(self.verticalLayoutWidget)
+        self.image_termica.setObjectName(u"image_termica")
+        self.image_termica.setContentsMargins(0, 0, 0, 0)
+        self.tabWidget.addTab(self.tab_2, "")
 
-        self.verticalLayout_3.addWidget(self.image_rgb)
-
-
-        self.horizontalLayout_8.addLayout(self.verticalLayout_3)
-
-
-        self.horizontalLayout.addWidget(self.imagenes_widget)
+        self.horizontalLayout.addWidget(self.tabWidget)
 
         self.line_2 = QFrame(self.centralwidget)
         self.line_2.setObjectName(u"line_2")
@@ -262,12 +259,17 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
+        self.tabWidget.setCurrentIndex(0)
+
+
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Aplicativo Hipertermia", None))
         self.image_rgb.setText("")
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.RGB), QCoreApplication.translate("MainWindow", u"RGB", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Termica", None))
         self.parametros_termicos_label.setText(QCoreApplication.translate("MainWindow", u"Parametros termicos", None))
         self.temperatura_maxima.setText(QCoreApplication.translate("MainWindow", u"Temperatura maxima:", None))
         self.temperatura_maxima_value.setText(QCoreApplication.translate("MainWindow", u"43 \u00b0C", None))
